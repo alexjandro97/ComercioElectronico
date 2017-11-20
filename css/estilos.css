@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+
+body {
+	background: url(../img/fondo.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+
+.titulo {
+	background: rgba(0,0,0,.6);
+	border-radius: 5px;
+	color: #fff;
+	padding: 10px;
+}
+
+.formulario {
+	margin-top: 85px;
+}

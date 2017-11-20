@@ -17,13 +17,17 @@ and open the template in the editor.
     <body>
         <div class="container">
             <div class="titulo text-center">
-                <h1>Iniciar Sesión - Cadabra</h1>
+                <h1>Registro - Cadabra</h1>
             </div>
 
             <div class="row">
                 <div class="col"></div>
                 <div class="formulario col-md-5">
-                    <form action="comprobar.php" method="post" name="form" id="form" class="form-control">
+                    <form action="insertar.php" method="post" name="form" id="form" class="form-control">
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
                         <div class="form-group">
                             <label for="user">E-Mail:</label>
                             <input type="email" id="user" name="user" class="form-control" required>
@@ -33,17 +37,14 @@ and open the template in the editor.
                             <input type="password" id="pass" name="pass" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input">
-                              <span class="custom-control-indicator"></span>
-                              <span class="custom-control-description">Mostrar Contraseña</span>
-                            </label>
+                            <label for="pass2">Repite Contraseña:</label>
+                            <input type="password" id="pass2" name="pass2" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <input type="submit" id="submit" name="submit" class="btn btn-block btn-info">
                         </div>
                         <div class="form-group">
-                            <p class="text-center">¿Aún no tienes cuenta? <a href="registro.php">Registrate</a></p>
+                            <p class="text-center">¿Ya tienes cuenta? <a href="index.php">Inicia Sesión</a></p>
                         </div>
                     </form>
                 </div>
