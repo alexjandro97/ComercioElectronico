@@ -22,8 +22,8 @@ and open the template in the editor.
 
             <div class="row">
                 <div class="col"></div>
-                <div class="formulario col-md-5">
-                    <form action="comprobar.php" method="post" name="form" id="form" class="form-control">
+                <div class="formulario col-md-5 col-sm-7 col-xs-12">
+                    <form action="iniciarSesion.php" method="post" name="form" id="form" class="form-control">
                         <div class="form-group">
                             <label for="user">E-Mail:</label>
                             <input type="email" id="user" name="user" class="form-control" required>
@@ -34,7 +34,7 @@ and open the template in the editor.
                         </div>
                         <div class="form-group">
                             <label class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input">
+                              <input type="checkbox" id="check" onclick="showHidePass();" class="custom-control-input">
                               <span class="custom-control-indicator"></span>
                               <span class="custom-control-description">Mostrar Contraseña</span>
                             </label>
@@ -43,7 +43,7 @@ and open the template in the editor.
                             <input type="submit" id="submit" name="submit" class="btn btn-block btn-info">
                         </div>
                         <div class="form-group">
-                            <p class="text-center">¿Aún no tienes cuenta? <a href="registro.php">Registrate</a></p>
+                            <p class="text-center">¿Aún no tienes cuenta? <strong><a href="registro.php"  data-toggle="tooltip" title="Registrate!!">Registrate</a></strong></p>
                         </div>
                     </form>
                 </div>
@@ -51,8 +51,22 @@ and open the template in the editor.
             </div>
             
         </div>
-        <?php
-        
-        ?>
+        <script>
+            function showHidePass() {
+                var checkbox = document.getElementById('check');
+                var passField = document.getElementById('pass');
+
+                if(checkbox.checked == true) {
+                    passField.type = "text";
+                }else {
+                    passField.type = "password";
+                }
+            }
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
     </body>
 </html>

@@ -12,6 +12,7 @@ body {
 	background-size: cover;
 }
 
+
 .titulo {
 	background: rgba(0,0,0,.6);
 	border-radius: 5px;
@@ -20,5 +21,9 @@ body {
 }
 
 .formulario {
-	margin-top: 85px;
+	margin-top: 55px;
+}
+
+.row {
+	margin-bottom: 75px;
 }
