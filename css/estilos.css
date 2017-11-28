@@ -27,3 +27,18 @@ body {
 .row {
 	margin-bottom: 75px;
 }
+
+.jumbotron {
+	padding: 5px;
+}
+
+.nav-link {
+	cursor: pointer;
+}
+
+#perfil {
+	background: #f2f2f2; 
+	top: 60px; 
+	position: absolute; 
+	display: none;
+}

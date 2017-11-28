@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	padding: 0;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	background: #f2f2f2;
+}
+.contenedor {
+	width: 100%;
+}
+#itemsPanel {
+	height: 100vh;
+	padding: 5px;
+	background: #848484;
+	border-right: 1px solid #848484;
+}
+.col {
+	padding: 10px;
+}
+.btn {
+	cursor: pointer;
+}
+.separacion {
+	margin-top: 10px;
+}
+
+.articulos {
+	border-top: 1px solid #f2f2f2;
+	border-bottom: 1px solid #f2f2f2;
+	padding: 15px;
+}
+
+#bienvenido {
+	display: none;
+}
