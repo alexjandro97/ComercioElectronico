@@ -25,27 +25,24 @@
 
     $resultado = mysqli_query($con, $sql);
     // PROBAR EL FETCH PARA IMPRIMIR DATOS
-    $articulos = $resultado->fetchAll();
+    $articulos = mysqli_fetch_all($resultado);
 
-   /*	if($resultado = mysqli_query($con, $sql)){
-        while($objeto = mysqli_fetch_array($resultado)){
-            $nombreProducto = $objeto[1];
-            $precioProducto = $objeto[0];
-            $stockProducto = $objeto[2];
-            $nuevoProducto = $objeto[3];
-            $descripcionProducto = $objeto[4];
-            $foto = $objeto[5];
+ 	/*$nombreProducto = $articulos[2];
+    $precioProducto = $articulos[1];
+    $stockProducto = $articulos[3];
+    $nuevoProducto = $articulos[4];
+    $descripcionProducto = $articulos[5];
+    $foto = $articulos[6];
 
-            if($foto == null){
-               	echo "Sin Foto";
-            }
-            if($nuevoProducto == 1){
-               	$nuevoProducto = '<span class="badge badge-danger">New</span>';
-            } else {
-               	$nuevoProducto = '';
-            }
-		}
-	}*/
+    if($foto == null){
+      	echo "Sin Foto";
+    }
+    if($nuevoProducto == 1){
+    	$nuevoProducto = '<span class="badge badge-danger">New</span>';
+    } else {
+    	$nuevoProducto = '';
+    }	
+	*/
 	?>
 
 </head>
@@ -57,13 +54,6 @@
 				<ul class="navbar-nav">
 					<li class="nav-item">
 						<a href="tienda.php" class="nav-link active">Inicio</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a href="" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Categorías</a>
-						<div class="dropdown-menu">
-							<a href="#" class="dropdown-item">Guantes</a>
-							<a href="#" class="dropdown-item">Balones</a>
-						</div>
 					</li>
 					<li class="nav-item">
 						<span class="nav-link" id="btnPerfil">Perfil</span>
@@ -97,17 +87,17 @@
 					</div>
 				</div>
 				<!-- BUCLE PARA IMPRIMIR TODAS LAS TUPLAS DE LA BBDD -->
-				<?php foreach ($articulos as $articulo):?>
-					<div class="card col-md-4" style=" float: left; margin: 5px 5px;">
-					<img src="<?php echo $foto; ?>" class="img-fluid card-img-top">
+				<?php foreach ($articulos as $articulo[]):?>
+					<div class="card col-md-5" style=" float: left; margin: 5px 5px;">
+					<img src="<?php echo $articulo[6]; ?>" class="img-fluid card-img-top">
 					<div class="card-body">
-						<h4 class="card-title"><?php echo $nombreProducto . " " . $nuevoProducto; ?></h4>
-						<p class="card-text"><?php echo $descripcionProducto; ?></p>
+						<h4 class="card-title"><?php echo  $articulo[2] . " " . $articulo[4]; ?></h4>
+						<p class="card-text"><?php echo  $articulo[5]; ?></p>
 						<form class="form-inline">
 							<div class="btn-group">
 								<button class="btn btn-primary" style="cursor: pointer;">Comprar</button>
 								<input type="number" class="form-control" min="1" max="20" placeholder="Un.">
-								<a class="btn btn-primary disabled form-control-static" style="color: #fff;"><?php echo $precioProducto ?>€</a>
+								<a class="btn btn-primary disabled form-control-static" style="color: #fff;"><?php echo  $articulo[1] ?>€</a>
 							</div>
 						</form>
 					</div>
@@ -121,7 +111,7 @@
 				<hr>
 				<div class="btn-group-vertical">
 					<button class="btn btn-lg btn-block btn-outline-dark disabled">Configuración</button>
-					<button class="btn btn-lg btn-block btn-outline-dark">Mis Pedidos</button>
+					<button class="btn btn-lg btn-block btn-outline-dark" style="cursor: pointer;">Mis Pedidos</button>
 					<button class="btn btn-lg btn-block btn-outline-dark disabled">Lista de Deseos</button>
 				</div>
 			</div>
@@ -132,6 +122,7 @@
 		$(document).ready(function()
         {
         	$('#btnPerfil').on("click", function(){
+        		$('#btnPerfil').toggleClass('active');
             	$('#perfil').toggle('slow');     
 			});                   
         });
