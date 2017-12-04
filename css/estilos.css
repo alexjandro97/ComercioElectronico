@@ -13,6 +13,16 @@ body {
 }
 
 
+body::-webkit-scrollbar {
+	width: 7px;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: #B45F04;
+	border-radius: 5px;
+}
+
+
 .titulo {
 	background: rgba(0,0,0,.6);
 	border-radius: 5px;

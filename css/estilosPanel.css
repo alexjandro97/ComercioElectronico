@@ -35,6 +35,30 @@ body {
 	padding: 15px;
 }
 
-#insertarArticulo {
+#insertarArticulo, #borrarArticulo, #buscarArticulo {
+	display: none;
+	padding: 15px;
+}
+
+#scroll {
+	overflow: auto;
+}
+
+
+
+.fa {
+	margin-right: 10px;
+}
+
+#labelImage {
+	padding: 20px;
+	background: #428bca;
+	color: #fff;
+	font-size: 20px;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+input[type="file"] {
 	display: none;
 }

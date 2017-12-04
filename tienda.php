@@ -21,7 +21,7 @@
     define("DB_DATABASE", "usuarios" );
 
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
-    $sql = "SELECT precio, nombre, stock, nuevo, descripcion, foto FROM productos";
+    $sql = "SELECT precio, nombre, nombreProducto, stock, nuevo, descripcion, foto FROM productos";
 
     $resultado = mysqli_query($con, $sql);
     // PROBAR EL FETCH PARA IMPRIMIR DATOS
