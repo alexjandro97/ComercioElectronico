@@ -32,5 +32,7 @@
           if(mysqli_errno($con)){ //si da error mata el proceso
         	die(mysqli_error($con)); 
 		}
+
+        header('Location: index.php');
 	}
  ?>

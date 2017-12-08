@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Atomic+Age" rel="stylesheet">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="shortcut icon" href="img/icono.png">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <title>Cadabra - Tienda</title>
@@ -21,28 +22,12 @@
     define("DB_DATABASE", "usuarios" );
 
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
-    $sql = "SELECT precio, nombre, nombreProducto, stock, nuevo, descripcion, foto FROM productos";
+    $sql = "SELECT * FROM productos";
 
     $resultado = mysqli_query($con, $sql);
     // PROBAR EL FETCH PARA IMPRIMIR DATOS
-    $articulos = mysqli_fetch_all($resultado);
-
- 	/*$nombreProducto = $articulos[2];
-    $precioProducto = $articulos[1];
-    $stockProducto = $articulos[3];
-    $nuevoProducto = $articulos[4];
-    $descripcionProducto = $articulos[5];
-    $foto = $articulos[6];
-
-    if($foto == null){
-      	echo "Sin Foto";
-    }
-    if($nuevoProducto == 1){
-    	$nuevoProducto = '<span class="badge badge-danger">New</span>';
-    } else {
-    	$nuevoProducto = '';
-    }	
-	*/
+    $articulos = mysqli_fetch_all($resultado);	
+	
 	?>
 
 </head>
@@ -53,19 +38,28 @@
 				<a href="tienda.php" class="navbar-brand" style="font-family: 'Atomic Age', cursive; font-size: 40px;">Cadabra</a>
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a href="tienda.php" class="nav-link active">Inicio</a>
+						<a href="tienda.php" class="nav-link active">Inicio <i class="fa fa-home" aria-hidden="true"></i></a>
 					</li>
 					<li class="nav-item">
-						<span class="nav-link" id="btnPerfil">Perfil</span>
+						<span class="nav-link" id="btnPerfil">Perfil <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
 					</li>
+					<?php if (isset($_GET['usuario'])) {
+						if ($_GET['usuario'] == "root") {
+						echo "
+						<li class='nav-item'>
+							<a href='adminPanel.php?usuario=$user' class='nav-link'>Panel Administración <i class='fa fa-university' aria-hidden='true'></i></a>
+						</li>
+						";
+						}
+					} ?>
 					<li class="nav-item">
-						<a href="cerrarSesion.php" class="nav-link">Cerrar Sesión</a>
+						<a href="cerrarSesion.php" class="nav-link">Cerrar Sesión <i class="fa fa-sign-out" aria-hidden="true"></i></a>
 					</li>
 				</ul>
 
-				<form class="search form-inline">
+				<form action="" class="search form-inline">
 					<input type="text" class="form-control mr-sm-2" placeholder="Search">
-					<button type="submit" class="btn btn-light">Buscar</button>
+					<button type="submit" class="btn btn-light disabled" style="cursor: no-drop;">Buscar</button>
 				</form>
 			</nav>
 		</div>
@@ -87,22 +81,39 @@
 					</div>
 				</div>
 				<!-- BUCLE PARA IMPRIMIR TODAS LAS TUPLAS DE LA BBDD -->
-				<?php foreach ($articulos as $articulo[]):?>
-					<div class="card col-md-5" style=" float: left; margin: 5px 5px;">
-					<img src="<?php echo $articulo[6]; ?>" class="img-fluid card-img-top">
-					<div class="card-body">
-						<h4 class="card-title"><?php echo  $articulo[2] . " " . $articulo[4]; ?></h4>
-						<p class="card-text"><?php echo  $articulo[5]; ?></p>
-						<form class="form-inline">
-							<div class="btn-group">
-								<button class="btn btn-primary" style="cursor: pointer;">Comprar</button>
-								<input type="number" class="form-control" min="1" max="20" placeholder="Un.">
-								<a class="btn btn-primary disabled form-control-static" style="color: #fff;"><?php echo  $articulo[1] ?>€</a>
+				<?php for ($i=0; $i < count($articulos) ; $i++) { 
+					$nombreProducto = $articulos[$i][7];
+				    $precioProducto = $articulos[$i][1];
+				    $stockProducto = $articulos[$i][3];
+				    $nuevoProducto = $articulos[$i][4];
+				    $descripcionProducto = $articulos[$i][5];
+				    $foto = $articulos[$i][6];
+				    
+				    if($nuevoProducto == 1){
+				    	$nuevoProducto = '<span class="badge badge-danger">New</span>';
+				    } else {
+				    	$nuevoProducto = '';
+				    }
+						PRINT <<<CODE
+						<div class="card col-md-5" style=" float: left; margin: 5px 5px;">
+							<img src="$foto" class="img-fluid card-img-top">
+							<div class="card-body">
+								<h4 class="card-title">$nombreProducto  $nuevoProducto</h4>
+								<p class="card-text">$descripcionProducto</p>
+								<form action="comprar.php" method="post" class="form-inline">
+									<div class="btn-group">
+										<input type="number" name="unidades" id="unidades" class="form-control" min="1" max="20" placeholder="Un.">
+										<button type="submit" class="btn btn-primary" style="cursor: pointer;">Comprar</button>
+										<a class="btn btn-primary disabled form-control-static" style="color: #fff;">$precioProducto €</a>
+									</div>
+								</form>
 							</div>
-						</form>
-					</div>
-				</div>
-				<?php endforeach; ?>
+						</div>
+CODE;
+				    			     
+				} ?>
+					
+				
 			</div>
 		</div>
 		<div class="row">
@@ -111,7 +122,7 @@
 				<hr>
 				<div class="btn-group-vertical">
 					<button class="btn btn-lg btn-block btn-outline-dark disabled">Configuración</button>
-					<button class="btn btn-lg btn-block btn-outline-dark" style="cursor: pointer;">Mis Pedidos</button>
+					<a href="pedidos.php?usuario='$user'" class="btn btn-lg btn-block btn-outline-dark" style="cursor: pointer;">Mis Pedidos <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
 					<button class="btn btn-lg btn-block btn-outline-dark disabled">Lista de Deseos</button>
 				</div>
 			</div>

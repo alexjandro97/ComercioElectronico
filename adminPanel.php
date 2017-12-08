@@ -20,6 +20,7 @@
 			height: 40px;
 		}
 		tr:nth-child(even) {background-color: #f2f2f2;}
+		.notFound {display: none;}
 	</style>
 </head>
 <body>
@@ -31,15 +32,14 @@
 				  	<p class="list-group-item list-group-item-action text-center" style="font-family: 'Atomic Age', cursive;">Hola, <?php echo $user; ?></p>
 				  	<a href="adminPanel.php?usuario=root" class="btn separacion btn-block btn-outline-dark" id="home">Inicio</a>
 					<button class="btn separacion btn-block btn-outline-dark" id="agregar">Añadir Articulos</button>
-					<button class="btn separacion btn-block btn-outline-dark" id="modificar">Modificar / Consulta Articulos</button>
+					<button class="btn separacion btn-block btn-outline-dark" id="modificar">Modificar/Consulta Articulos</button>
 					<button class="btn separacion btn-block btn-outline-dark" id="borrar">Borrar Articulos</button>
+					<a href="tienda.php?usuario=root" class="btn separacion btn-block btn-outline-dark">Entrar a Cadabra</a>
 					<a href="cerrarSesion.php" class="btn separacion btn-block btn-outline-dark">Cerrar Sesión</a>
 				</div>
 			</div>
 			<div class="col-10" id="scroll">
 				<div>
-					<h1 class="text-center">Panel de administración</h1>
-					<hr>
 					<div class="row">
 						<div class="col"></div>
 						<!-- BIENVENIDA -->
@@ -59,7 +59,7 @@
 											$stock = $_GET['stock'];
 											$ref = $_GET['ref'];
 											echo "
-											<h3> Resultado Consulta </h3>
+											<h3 class='text-center'> Resultado Consulta </h3>
 												<table>
 													<tr>
 														<th>Nº Referencia</th>
@@ -105,15 +105,17 @@
 								</div>
 								<div class="form-group">
 									<label for="precio">Precio</label>
-									<input type="number" name="precio" id="precio" min="0" placeholder="€" class="form-control">
+									<input type="number" name="precio" id="precio" min="0" placeholder="€" step="any" class="form-control">
 								</div>
-								<div class="form-group">
-									<label for="foto" id="labelImage"><i class="fa fa-cloud-upload" aria-hidden="true"></i>Subir Imagen</label>
-									<input type="file" name="foto" id="foto">
-								</div>
-								<div class="form-group">
-									<button class="btn btn-block btn-success">Crear Producto</button>
-									<input class="btn btn-block btn-danger" type="reset" value="Salir Sin Grabar">
+								<div class="row">
+									<div class="form-group col-6">
+										<label for="foto" id="labelImage"><i class="fa fa-cloud-upload" aria-hidden="true"></i>Subir Imagen</label>
+										<input type="file" name="foto" id="foto">
+									</div>
+									<div class="form-group col-6">
+										<button class="btn btn-block btn-success">Crear Producto</button>
+										<input class="btn btn-block btn-danger" type="reset" value="Salir Sin Grabar">
+									</div>
 								</div>
 							</form>
 						</div>
