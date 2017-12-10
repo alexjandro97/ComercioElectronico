@@ -28,13 +28,13 @@
 		<div class="row fixed-top">
 			<div class="col-2" id="itemsPanel">
 				<div class="list-group">
-				  	<a href="adminPanel.php" class="list-group-item list-group-item-action" style="font-family: 'Atomic Age', cursive; font-size: 40px;">Cadabra</a>
+				  	<a href="adminPanel.php?usuario=<?php echo $user; ?>" class="list-group-item list-group-item-action" style="font-family: 'Atomic Age', cursive; font-size: 40px;">Cadabra</a>
 				  	<p class="list-group-item list-group-item-action text-center" style="font-family: 'Atomic Age', cursive;">Hola, <?php echo $user; ?></p>
-				  	<a href="adminPanel.php?usuario=root" class="btn separacion btn-block btn-outline-dark" id="home">Inicio</a>
+				  	<a href="adminPanel.php?usuario=<?php echo $user; ?>" class="btn separacion btn-block btn-outline-dark" id="home">Inicio</a>
 					<button class="btn separacion btn-block btn-outline-dark" id="agregar">Añadir Articulos</button>
 					<button class="btn separacion btn-block btn-outline-dark" id="modificar">Modificar/Consulta Articulos</button>
 					<button class="btn separacion btn-block btn-outline-dark" id="borrar">Borrar Articulos</button>
-					<a href="tienda.php?usuario=root" class="btn separacion btn-block btn-outline-dark">Entrar a Cadabra</a>
+					<a href="tienda.php?usuario=<?php echo $user; ?>" class="btn separacion btn-block btn-outline-dark">Entrar a Cadabra</a>
 					<a href="cerrarSesion.php" class="btn separacion btn-block btn-outline-dark">Cerrar Sesión</a>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 						<!-- ADD Product -->
 						<div class="jumbotron col-6" id="insertarArticulo">
 							<h5 class="text-center">Nuevo Articulo</h5>
-							<form action="insertarArticulos.php" method="POST" class="form-control">
+							<form action="insertarArticulos.php" method="POST" class="form-control" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="referencia">Referencia</label>
 									<input type="number" name="referencia" id="referencia" class="form-control">
@@ -110,7 +110,7 @@
 								<div class="row">
 									<div class="form-group col-6">
 										<label for="foto" id="labelImage"><i class="fa fa-cloud-upload" aria-hidden="true"></i>Subir Imagen</label>
-										<input type="file" name="foto" id="foto">
+										<input type="file" id="foto" name="foto">
 									</div>
 									<div class="form-group col-6">
 										<button class="btn btn-block btn-success">Crear Producto</button>

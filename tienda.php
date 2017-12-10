@@ -11,7 +11,6 @@
     <title>Cadabra - Tienda</title>
     <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-
 	<?php 
 
 	$user = $_REQUEST['usuario'];
@@ -35,10 +34,10 @@
 	<div class="container">
 		<div class="row">
 			<nav class="col-md-12 navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-				<a href="tienda.php" class="navbar-brand" style="font-family: 'Atomic Age', cursive; font-size: 40px;">Cadabra</a>
+				<a href="tienda.php?usuario=<?php echo $user; ?>" class="navbar-brand" style="font-family: 'Atomic Age', cursive; font-size: 40px;">Cadabra</a>
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a href="tienda.php" class="nav-link active">Inicio <i class="fa fa-home" aria-hidden="true"></i></a>
+						<a href="tienda.php?usuario=<?php echo $user; ?>" class="nav-link active">Inicio <i class="fa fa-home" aria-hidden="true"></i></a>
 					</li>
 					<li class="nav-item">
 						<span class="nav-link" id="btnPerfil">Perfil <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
@@ -82,6 +81,7 @@
 				</div>
 				<!-- BUCLE PARA IMPRIMIR TODAS LAS TUPLAS DE LA BBDD -->
 				<?php for ($i=0; $i < count($articulos) ; $i++) { 
+					$idProducto = $articulos[$i][0];
 					$nombreProducto = $articulos[$i][7];
 				    $precioProducto = $articulos[$i][1];
 				    $stockProducto = $articulos[$i][3];
@@ -95,15 +95,14 @@
 				    	$nuevoProducto = '';
 				    }
 						PRINT <<<CODE
-						<div class="card col-md-5" style=" float: left; margin: 5px 5px;">
-							<img src="$foto" class="img-fluid card-img-top">
+						<div class="card" style=" float: left; margin: 5px 5px;">
+							<a href="individual.php?id=$idProducto&usuario=$user"><img src="$foto" class="img-fluid card-img-top"></a>
 							<div class="card-body">
 								<h4 class="card-title">$nombreProducto  $nuevoProducto</h4>
-								<p class="card-text">$descripcionProducto</p>
-								<form action="comprar.php" method="post" class="form-inline">
+								<div class="descripcion" style="overflow: auto;"><p class="card-text">$descripcionProducto</p></div>
+								<form action="individual.php?id=$idProducto&usuario=$user" method="post" class="form-inline">
 									<div class="btn-group">
-										<input type="number" name="unidades" id="unidades" class="form-control" min="1" max="20" placeholder="Un.">
-										<button type="submit" class="btn btn-primary" style="cursor: pointer;">Comprar</button>
+										<button type="submit" class="btn btn-primary" style="cursor: pointer;">Ver Producto</button>
 										<a class="btn btn-primary disabled form-control-static" style="color: #fff;">$precioProducto €</a>
 									</div>
 								</form>
@@ -122,7 +121,7 @@ CODE;
 				<hr>
 				<div class="btn-group-vertical">
 					<button class="btn btn-lg btn-block btn-outline-dark disabled">Configuración</button>
-					<a href="pedidos.php?usuario='$user'" class="btn btn-lg btn-block btn-outline-dark" style="cursor: pointer;">Mis Pedidos <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+					<a href="pedidos.php?usuario=<?php echo $user; ?>" class="btn btn-lg btn-block btn-outline-dark" style="cursor: pointer;">Mis Pedidos <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
 					<button class="btn btn-lg btn-block btn-outline-dark disabled">Lista de Deseos</button>
 				</div>
 			</div>

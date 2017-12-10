@@ -13,7 +13,7 @@
 	$tamano = $_FILES['imagen']['size'];*/
 
 	$stock = $_POST['stock'];
-
+	$user = "root";
 	$nuevo = 1;
 /* Declaro las variables fijas para la conexion a la base de datos */
 
@@ -26,61 +26,36 @@
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
       
         // si hay un error pete, sino ejecuta
-    if (mysqli_connect_errno())
-    {
-    	echo "Imposible conectarse a la base de datos: " . mysqli_connect_error();
+    if (!$con) {
+    	echo "La conexion a la BBDD peta";
+    }
+
+    	print_r($_FILES);
+    	echo "<br>Chivato1";
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
+		$check = @getimagesize($_FILES['foto']['tmp_name']);
+		echo "<br>Chivato2";
+		if ($check !== false) {
+			$carpeta_destino = 'fotos/';
+			echo "<br>Chivato3";
+			$archivo_subido = $carpeta_destino . $_FILES['foto']['name'];
+			move_uploaded_file($_FILES['foto']['tmp_name'], $archivo_subido);
+			echo "<br>chivato4";
+
+			$sql = "INSERT INTO productos (precio, nombre, stock, nuevo, descripcion, foto, nombreProducto) VALUES
+	    		('$precio', '$referencia', '$stock', '$nuevo', '$descripcion', '$archivo_subido', '$nomProducto')";
+
+			$resultado = mysqli_query($con, $sql);	
+			var_dump($resultado);
+			echo "<br>chivato5";
+		} else {
+			echo "El archivo no es una imagen o el archivo es muy pesado";
+		}
+
 	} else {
-		
-
-		/*//Si existe imagen y tiene un tamaño correcto
-		if (($nombre_img == !NULL) && ($_FILES['imagen']['size'] <= 200000)) 
-		{
-		   //indicamos los formatos que permitimos subir a nuestro servidor
-		   if (($_FILES["imagen"]["type"] == "image/gif")
-		   || ($_FILES["imagen"]["type"] == "image/jpeg")
-		   || ($_FILES["imagen"]["type"] == "image/jpg")
-		   || ($_FILES["imagen"]["type"] == "image/png"))
-		   {
-		      // Ruta donde se guardarán las imágenes que subamos
-		      $directorio = $_SERVER['DOCUMENT_ROOT'].'/intranet/uploads/';
-		      // Muevo la imagen desde el directorio temporal a nuestra ruta indicada anteriormente
-		      move_uploaded_file($_FILES['imagen']['tmp_name'],$directorio.$nombre_img);
-		    } 
-		    else 
-		    {
-		       //si no cumple con el formato
-		       echo "No se puede subir una imagen con ese formato ";
-		    }
-		} 
-		else 
-		{
-		   //si existe la variable pero se pasa del tamaño permitido
-		   if($nombre_img == !NULL) echo "La imagen es demasiado grande "; 
-		}
-		*/
-
-
-
-
-
-
-
-
-
-
-
-		//escribo la consulta de SQL
-    	$sql = "INSERT INTO productos (precio, nombre, stock, nuevo, descripcion, nombreProducto) VALUE 
-    	('$precio', '$referencia', '$stock', '$nuevo', '$descripcion', '$nomProducto')";
-    	//ejecuto la query
-        $resultado = mysqli_query($con, $sql);
-
-          if(mysqli_errno($con)){ //si da error mata el proceso
-        	die(mysqli_error($con)); 
-		}
-
-		header('Location: adminPanel.php?usuario=root');
-
+		echo "<br>a la puta";
 	}
+	header('Location: adminPanel.php?usuario=<?php echo $user;?>');
+
 
  ?>

@@ -2,6 +2,8 @@
 
 
 	$referencia = $_POST['referencia'];
+    //prueba
+    $user = "root";
 
 /* Declaro las variables fijas para la conexion a la base de datos */
 
@@ -27,7 +29,7 @@
         	die(mysqli_error($con)); 
 		}
 
-		header('Location: adminPanel.php?usuario=root');
+		header('Location: adminPanel.php?usuario=<?php echo $user; ?>');
 
 	}
 

@@ -16,7 +16,6 @@
 		td, th {
 			border-bottom: 1px solid rgba(0,0,0,.3);
 		}
-		tr:nth-child(even) {background-color: #f2f2f2;}
 	</style>
 	<?php 
 
@@ -51,10 +50,10 @@
 	<div class="container">
 		<div class="row">
 			<nav class="col-md-12 navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-				<a href="tienda.php" class="navbar-brand" style="font-family: 'Atomic Age', cursive; font-size: 40px;">Cadabra</a>
+				<a href="tienda.php?usuario=<?php echo $user; ?>" class="navbar-brand" style="font-family: 'Atomic Age', cursive; font-size: 40px;">Cadabra</a>
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a href="tienda.php" class="nav-link">Inicio <i class="fa fa-home" aria-hidden="true"></i></a>
+						<a href="tienda.php?usuario=<?php echo $user; ?>" class="nav-link">Inicio <i class="fa fa-home" aria-hidden="true"></i></a>
 					</li>
 					<li class="nav-item">
 						<span class="nav-link active" id="btnPerfil">Perfil <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
@@ -87,12 +86,14 @@
 				<h3 class="tex-center"><?php echo $user ?></h3><hr>
 				<table>
 					<tr>
-						<th class="col-8">Producto</th>
-						<th class="col-4">Nº de Pedido</th>
+						<th class="col-8" style="width: 80%; text-align: center;">Producto</th>
+						<th class="col-4" style="width: 20%; text-align: center;">Nº de Pedido</th>
 					</tr>
+				</table>	
 					<?php
 					if (empty($articulos)) {
 						PRINT <<<ERROR
+							<table>
 								<tr>
 									<td style='border-bottom:0px; margin:5px;'><h5>No tienes ningun producto en compra.</h5></td>					
 								</tr>
@@ -104,9 +105,10 @@ ERROR;
 						$numeroPedido = $articulos[$i][0];
 						$nomProducto = $nombreArticulos[$i][0];
 						PRINT <<<CODE
+							<table>
 								<tr>
-									<td>$nomProducto</td>
-									<td>$numeroPedido</td>					
+									<td style="width: 80%; text-align: center;">$nomProducto</td>
+									<td style="width: 20%; text-align: center;">$numeroPedido</td>					
 								</tr>
 							</table>
 CODE;
