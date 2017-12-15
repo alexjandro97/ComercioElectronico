@@ -12,17 +12,13 @@
     <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	<?php 
-
 	$user = $_REQUEST['usuario'];
-
 	define("DB_HOST","localhost" );
 	define("DB_USER", "root");
     define("DB_PASS", "");
     define("DB_DATABASE", "usuarios" );
-
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
     $sql = "SELECT * FROM productos";
-
     $resultado = mysqli_query($con, $sql);
     // PROBAR EL FETCH PARA IMPRIMIR DATOS
     $articulos = mysqli_fetch_all($resultado);	

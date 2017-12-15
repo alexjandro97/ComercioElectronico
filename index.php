@@ -34,6 +34,17 @@
                               <span class="custom-control-description">Mostrar Contraseña</span>
                             </label>
                         </div>
+                        <?php if (isset($_GET['encontrado'])) {
+                           if ($_GET['encontrado'] == false) {
+                                 echo '
+                                    <div class="form-group">
+                                        <div class="alert alert-danger alert-dismissable">
+                                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                          <strong>Error!</strong><p> Contraseña o Usuario no encontrado.</p>
+                                        </div>
+                                    </div>';
+                           }
+                        } ?>
                         <div class="form-group">
                             <input type="submit" id="submit" name="submit" class="btn btn-block btn-info">
                         </div>

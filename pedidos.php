@@ -31,7 +31,8 @@
     if ($con) {
     	echo "Hay Conexion<br>";
     	$sql = "SELECT * FROM venta WHERE usuario = (SELECT id FROM usuarios WHERE (nombre = '$user') OR (correo = '$user'))";
-    	$sql2 = "SELECT nombreProducto FROM productos WHERE cod_producto IN (SELECT producto FROM venta WHERE usuario = (SELECT id FROM usuarios WHERE nombre = '$user'))";
+    	$sql2 = "SELECT nombreProducto FROM productos WHERE cod_producto IN (SELECT producto FROM venta WHERE usuario = (SELECT id FROM usuarios WHERE nombre =
+    	 '$user'))";
 
        	$resultado = mysqli_query($con, $sql);
 		$articulos = mysqli_fetch_all($resultado);
@@ -39,8 +40,6 @@
 		$resultadoNombre = mysqli_query($con, $sql2);
 		$nombreArticulos = mysqli_fetch_all($resultadoNombre);
 
-       //	 print_r($articulos);echo "<br><br>";
-      //  print_r($nombreArticulos);
     }else {
     	echo "No hay conexion";
     }
@@ -78,9 +77,7 @@
 				</form>
 			</nav>
 		</div>
-
 		<!-- FIN DE CABECERA -->
-
 		<div class="row">
 			<div class="jumbotron col-12">
 				<h3 class="tex-center"><?php echo $user ?></h3><hr>
@@ -100,19 +97,18 @@
 							</table>
 ERROR;
 					}else {
-
-					 for ($i=0; $i < count($articulos); $i++) { 
-						$numeroPedido = $articulos[$i][0];
-						$nomProducto = $nombreArticulos[$i][0];
-						PRINT <<<CODE
-							<table>
-								<tr>
-									<td style="width: 80%; text-align: center;">$nomProducto</td>
-									<td style="width: 20%; text-align: center;">$numeroPedido</td>					
-								</tr>
-							</table>
+						for ($i=0; $i < count($articulos); $i++) { 
+							$numeroPedido = $articulos[$i][0];
+							$nomProducto = $nombreArticulos[$i][0];
+							PRINT <<<CODE
+								<table>
+									<tr>
+										<td style="width: 80%; text-align: center;">$nomProducto</td>
+										<td style="width: 20%; text-align: center;">$numeroPedido</td>					
+									</tr>
+								</table>
 CODE;
-					}
+						}
 					} ?>
 			</div>
 		</div>
